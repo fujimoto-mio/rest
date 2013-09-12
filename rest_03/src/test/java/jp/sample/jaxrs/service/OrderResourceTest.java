@@ -42,7 +42,8 @@ public class OrderResourceTest {
 
             Assert.assertEquals(Status.OK.getStatusCode(), actual.getStatus());
             Assert.assertEquals(
-                    "{\"order\":{\"orderNo\":" + orderNo + ",\"userName\":\"Tarou\",\"itemName\":\"item01\"}}",
+                    "{\"order\":{\"orderNo\":" + orderNo 
+                    	+ ",\"userName\":\"Tarou\",\"itemName\":\"item01\"}}",
                     result);
         } catch (Exception e) {
             Assert.fail();
