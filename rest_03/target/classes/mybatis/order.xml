@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+    <resultMap type="order" id="result">
+        <id column="order_no"   property="orderNo"/>
+        <result column="user_name"  property="userName"/>
+        <result column="item_name"  property="itemName"/>
+        <result column="order_date" property="orderDate"/>
+    </resultMap>
+    
+    <insert id="create" parameterType="order"
+        useGeneratedKeys="true" keyProperty="orderNo">
+        insert into order_tbl (user_name, item_name, order_date)
+        values (#{userName}, #{itemName}, #{orderDate})
+    </insert>
+    
+    <select id="findById" parameterType="long" resultMap="result">
+        select * from order_tbl where order_no = #{id}
+    </select>
+    
+    <update id="update" parameterType="order">
+        update order_tbl
+        <set>
+            <if test="userName != null">user_name = #{userName},</if>
+            <if test="itemName != null">item_name = #{itemName},</if>
+            <if test="orderDate != null">order_date = #{orderDate}</if>
+        </set>
+        where order_no = #{orderNo}
+    </update>
+    
+    <select id="findAll" resultMap="result">
+        select * from order_tbl
+    </select>
+</mapper>
